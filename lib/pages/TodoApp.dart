@@ -1,4 +1,4 @@
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 
@@ -19,6 +19,7 @@ class _TodoAppState extends State<TodoApp> {
    
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title:  TextField(
           controller: titleText,
           
@@ -39,9 +40,21 @@ class _TodoAppState extends State<TodoApp> {
               return Container(
                 margin: EdgeInsets.only(bottom: 2.0),
                 child: ListTile(
-                  title: Text(Item[index]),
-                  tileColor: Colors.amberAccent,
+                  title: Text(Item[index],style: TextStyle(color: Colors.white),),
+                  tileColor: Colors.grey,
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(onPressed: (){
+                        setState(() {
+                          Item.removeAt(index);
+                        });
+                      }, icon: Icon(Icons.delete)),
+                      IconButton(onPressed: (){}, icon: Icon(Icons.edit))
+                    ],
+                  ),
                 ),
+
               );
           }
           ),
