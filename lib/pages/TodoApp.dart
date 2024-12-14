@@ -29,7 +29,7 @@ class _TodoAppState extends State<TodoApp> {
              Item.add(titleText.text);
           });
           titleText.clear();
-          }, child: Text("Add Item"))
+          }, child: const Text("Add Item"))
         ],
         ),
     body: ListView.builder(
@@ -37,7 +37,7 @@ class _TodoAppState extends State<TodoApp> {
           itemCount: Item.length,
           itemBuilder:(context,index){
               return Container(
-                margin: EdgeInsets.only(bottom: 2.0),
+                margin: const EdgeInsets.only(bottom: 2.0),
                 child: ListTile(
                   title: Text(Item[index]),
                   tileColor: Colors.amberAccent,
