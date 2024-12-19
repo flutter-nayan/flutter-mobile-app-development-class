@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/FormValidation.dart';
 import 'package:flutter_application_1/pages/TodoApp.dart';
 //import> 'package:flutter_application_1/pages/home.dart';
 //import 'package:flutter_application_1/pages/profileView.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: TodoApp(),
+      home:FormValidation(),
       debugShowCheckedModeBanner: false,
     );
   }

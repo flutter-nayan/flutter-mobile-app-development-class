@@ -22,13 +22,16 @@ class _TodoAppState extends State<TodoApp> {
         backgroundColor: Colors.blue,
         title:  TextField(
           controller: titleText,
+          decoration: InputDecoration(hintText: "Enter a Item"),
           
         ),
         actions: [
           ElevatedButton(onPressed: (){
-          setState(() {
+         if(titleText.text.isNotEmpty){
+           setState(() {
              Item.add(titleText.text);
           });
+         }
           titleText.clear();
           }, child: const Text("Add Item"))
         ],
@@ -41,7 +44,7 @@ class _TodoAppState extends State<TodoApp> {
                 margin: const EdgeInsets.only(bottom: 2.0),
                 child: ListTile(
                   title: Text(Item[index],style: TextStyle(color: Colors.white),),
-                  tileColor: Colors.grey,
+                  tileColor: const Color.fromARGB(255, 13, 2, 46),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -49,8 +52,10 @@ class _TodoAppState extends State<TodoApp> {
                         setState(() {
                           Item.removeAt(index);
                         });
-                      }, icon: Icon(Icons.delete)),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.edit))
+                      }, icon: Icon(Icons.delete,color: Colors.white,)),
+                      IconButton(onPressed: (){
+                        _showEdit(context,index);
+                      }, icon: Icon(Icons.edit,color: Colors.white,))
                     ],
                   ),
                 ),
@@ -61,5 +66,40 @@ class _TodoAppState extends State<TodoApp> {
       );
       
     
+  }
+
+  void _showEdit(BuildContext context,int index){
+    TextEditingController editdata = TextEditingController(text:Item[index]);
+    showDialog(
+      barrierDismissible: false,
+      context: context, builder:(context){
+      
+        return AlertDialog(
+          
+          title: Text("Edit Item",style: TextStyle(color: const Color.fromARGB(255, 8, 94, 57),fontWeight: FontWeight.bold),
+          
+          ),
+          content: TextField(
+            controller: editdata,
+            decoration: InputDecoration(hintText: "At least one item have to be added"),
+          ),
+          actions: [
+            TextButton(onPressed: (){
+              Navigator.pop(context);
+
+            }, child: Text("Cancel")),
+            ElevatedButton(onPressed: (){
+             if(editdata.text.isNotEmpty){
+               setState(() {
+                Item[index] = editdata.text;
+              });
+             }
+              Navigator.pop(context);
+            }, child: Text("Save"))
+          ],
+        );
+
+    }
+    );
   }
 }
